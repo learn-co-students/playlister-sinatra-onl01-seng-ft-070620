@@ -1,8 +1,11 @@
-
+<h3>Song(s) with "<%= @genre.name %>" genre </h3>
 <% @genre.songs.each do |song| %>
 <a href="/songs/<%= song.slug %>"><%= song.name %></a>
+<br>
 <% end %>
 <br>
+<h3>Artist(s) who have songs with "<%= @genre.name %>" genre </h3>
 <% @genre.artists.each do |artist| %>
 <a href="/artists/<%= artist.slug %>"><%= artist.name %></a>
+<br>
 <% end %>
