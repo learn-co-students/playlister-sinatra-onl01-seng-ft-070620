@@ -21,9 +21,9 @@ class SongsController < ApplicationController
     end
 
     post '/songs' do 
-        song = Song.create(name: params[:song][:name])
-        song.artist = Artist.find_or_create_by(name: params[:song][:artist])
-        song.genres << Genre.find(params[:song][:genre_ids])
+        song = Song.create(params[:song])
+        song.artist = Artist.find_or_create_by(params[:artist])
+        song.genre_ids = params[:genres]
         song.save
         flash[:message] = "Successfully created song."
         redirect "/songs/#{song.slug}"
@@ -37,9 +37,9 @@ class SongsController < ApplicationController
 
     patch '/songs/:slug' do
         song = Song.find_by_slug(params[:slug])
-        song.update(name: params[:song][:name])
-        song.artist = Artist.find_or_create_by(name: params[:song][:artist])
-        song.genres << Genre.find(params[:song][:genre_ids])
+        song.update(params[:song])
+        song.artist = Artist.find_or_create_by(params[:artist])
+        song.genre_ids = params[:genres]
         song.save
         flash[:message] = "Successfully updated song."
         redirect "/songs/#{song.slug}"
